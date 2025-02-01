@@ -42,7 +42,7 @@ class ReviewForm(forms.ModelForm):
         fields = '__all__'
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ['review', 'rating']
+    list_display = ['id', 'review', 'rating', 'product']
     form = ReviewForm
 
 class CartAdmin(admin.ModelAdmin):
