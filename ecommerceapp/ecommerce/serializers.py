@@ -37,5 +37,9 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+class ReviewSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Review
+        fields = ['id', 'rating', 'review', 'product', 'user']
 
