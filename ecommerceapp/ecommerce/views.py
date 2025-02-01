@@ -76,6 +76,20 @@ class UserViewSet(viewsets.ViewSet, generics.ListAPIView, generics.CreateAPIView
             return [permissions.IsAuthenticated()]
 
         return [permissions.AllowAny()]
+        
+    @action(methods=['get'], detail=False, url_path='current_user')
+    def get_current_user(self, request):
+        return Response(serializers.UserSerializer(request.user).data)
+        
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    @action(methods=['get'], detail=False, url_path='(?P<rating>[0-9]+)/get_products_by_reviews')
+    def get_products(self, request, rating=None):
+        products = Product.objects.filter(ratings__rating=rating).distinct()
+        return Response(serializers.ProductSerializer(products, many=True, context={'request': request}).data)
+
 
 def welcome(request, year):
     return HttpResponse("HELLO " + str(year))
