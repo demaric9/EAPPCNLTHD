@@ -11,6 +11,7 @@ router.register('sellers', views.SellerViewSet, basename='seller')
 router.register('categories', views.CategoryViewSet, basename='category')
 router.register('products', views.ProductViewSet, basename='product')
 router.register('users', views.UserViewSet, basename='user')
+router.register('reviews', views.ReviewViewSet, basename='review')
 
 # /seller/ - GET
 # /seller/ - POST
